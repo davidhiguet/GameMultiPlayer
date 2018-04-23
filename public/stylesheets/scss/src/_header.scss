@@ -1,0 +1,66 @@
+body{
+    background-color: $colorPoliceOne;
+}
+#map{
+    height: 400px;
+    width: 100%;
+}
+header{
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    background-color: white!important;
+    margin: 0 auto;
+    text-align: center;
+    height: 150px;
+    h1{
+        margin-top: $dimension;
+        color: $colorThree;
+        width: 100%; 
+    }
+    h2{
+        color:  white;
+        @include shadow3;
+        background-color: $colorThree;
+        width: 100%; 
+        z-index: 10000;
+    }
+    .navbar{
+        //height: 50px!important;
+        top:150px!important;
+        background-color:  black!important;
+        border-top:5px solid black;
+        text-align: center;
+        a{
+        color: white;
+        padding: 0!important;
+        font-family: "robotothin"!important;
+            &:hover, &:active, &:focus{
+            color: $colorThree!important; 
+            }
+    }
+}
+.navbar-toggler{
+    background-color: $colorThree!important; 
+    &:hover, {
+        background-color: $colorThree!important; 
+    }
+}   
+ /*   a{
+    position: absolute;
+    width: 50px;height: 50px;
+    background-image: radial-gradient(ellipse at center, $colorThree 40%,  $colorOne 100%); 
+    line-height: 50px;
+    @include arrondi;@include shadow;
+    color: $colorPoliceOne;  
+        &:first-of-type{
+            left: $dimension;
+            top: $dimension;
+        }
+        &:hover{
+            @include shadow2;
+            color: $colorOne;
+            text-decoration: none;
+        }
+    }*/
+}

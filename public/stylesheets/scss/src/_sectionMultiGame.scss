@@ -1,0 +1,101 @@
+// section multi player connect page
+#multiPlayerConnect{
+margin-top: 245px;
+@include shadow4;
+background-color: black;
+    article{
+    margin: 0 auto;
+    text-align: center;
+    width:600px;
+    height: 600px;
+    color: black;
+    }
+    article:first-of-type{
+        #formPart{
+        position: absolute;
+        top: 0;
+        height: 100vh;
+        display: block;
+        overflow: hidden;
+        margin: 0 auto;
+        text-align: center;
+            #formulaire{
+            width: 600px;
+            height: 600px;
+            color: white;
+            display: block;
+            border: 10px solid red;
+            border-radius:$dimRadius;
+            text-align: center;
+                .contour{
+                padding-top: 48px;
+                position: absolute;
+                border: 10px solid yellow;
+                background-color: rgb(123, 173, 202);
+                border-radius:$dimRadius;
+                width: 580px;
+                height: 580px;
+                box-shadow : inset 0 5px 42px rgba(0, 0, 0, 0.5);
+                    .cadre{
+                    display: flex;
+                    margin: 0 auto;
+                    text-align: center;
+                        .perso{
+                        margin: 0 auto;
+                        text-align: center;
+                            img{
+                            height: 150px;
+                            }
+                        }
+                    }
+                    .bague{
+                    //position: absolute;
+                    border: 10px solid red;
+                    border-radius:$dimRadius;
+                    width: 150px;
+                    min-height: 150px;
+                    @include shadow;
+                    margin: 0 auto;
+                        #start{
+                        border: 10px solid yellow;
+                        border-radius : $dimRadius;
+                        width: 130px;
+                        height: 130px;
+                        text-align: center;
+                        line-height: 100px;
+                        font-size: 25px;
+                        font-weight: bolder;
+                        text-decoration: italic;
+                        color: white;
+                        background-color: rgb(123, 173, 202);
+                            &:hover{
+                            box-shadow : inset 0 5px 42px rgba(0, 0, 0, 0.5);
+                            }
+                        }
+                    }
+                    h5{
+                    color: red;
+                    width: 150px;
+                    margin: 0 auto;
+                    padding-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+    article:nth-child(2){
+        #consigne{
+            background-color: white;
+        }
+        h2{
+            color: red;
+        }
+        li{
+            color: white;
+        }
+    }
+    span{
+    color: black;
+    }
+    
+}

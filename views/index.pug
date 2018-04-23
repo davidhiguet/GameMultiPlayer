@@ -1,0 +1,43 @@
+extends layout.pug
+
+block append head
+  title= "serveur"
+
+block append header 
+    h1 DH - DESIGN / DEV
+    h2 Home
+
+    block append nav
+        
+block append content 
+    section.home.container
+        .row
+            article.col-lg-12
+                h2 Mes r&eacute;alisations
+                br
+                p &quot;AND THEY SAID - THAT&apos;S THREE - BIG THREE&quot;
+            article.col-lg-4
+                a(href='https://www.soproxi.com/application-commerce-proximite')
+                    .circle.un
+                h3  SOPROXI
+            article.col-lg-4
+                a(href='http://arthursoon.com')
+                    .circle.deux
+                h3
+                    | ARTHUR SOON 
+                    br
+                    | -
+                    br
+                    | PHOTOGRAPHE
+            article.col-lg-4
+                a(href='http://www.pompadour-sellier.com')
+                    .circle.trois
+                h3
+                    | POMPADOUR 
+                    br
+                    | -
+                    br
+                    | SELLIER
+                h4 En cours ...
+
+    block append pied  

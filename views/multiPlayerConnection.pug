@@ -1,0 +1,48 @@
+extends layout.pug
+
+block append head
+ title= "serveur"
+ script(src="/javascripts/validationForm.js")
+  
+block append header 
+  h1 MULTI PLAYER GAME
+  h2 SOCKETIO
+
+  block append nav
+        
+block append content 
+  section#multiPlayerConnect.container
+    .row
+      article.col-lg-6
+        #formPart
+          form#formulaire(action="/multiPlayerGame" name="monform" method="post")
+            .contour
+              label(for="text") CHOISISEZ VOTRE AVATAR
+              .cadre
+                .perso
+                  img(src="/images/avatar1.png" alt="avatar1")
+                  br
+                  input#avatar1(type="radio" name="avatar" value="avatar1")
+                .perso
+                  img(src="/images/avatar2.png" alt="avatar2")
+                  br
+                  input#avatar2(type="radio" name="avatar" value="avatar2")
+              br
+              label(for="text") Pseudo :
+              input#pseudo(type="text" name="pseudo" value="")
+              .bague
+                input#start(type="submit" value="START")
+              h5#errorMessage
+                h5= message
+      article.col-lg-6
+        #consigne
+          h3 CONSIGNES
+          p 1 - Durée du jeu : 15 secondes.
+          p 2 - Vous devez cliquer le plus de fois possible sur les cercles jaunes.
+          p 3 - Attention, si vous cliquez sur un cercle rouge, vous perdez un points.
+        h2 Meilleur score
+        ul
+        for val in party
+            li= val.name +": "+ val.score+" points"
+
+  block append pied

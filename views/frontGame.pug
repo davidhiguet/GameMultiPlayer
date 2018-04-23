@@ -1,0 +1,74 @@
+extends layout.pug
+
+block append head
+  title= "serveur"
+
+block append header 
+    h1 FRONT GAME
+    h2 CHARLIE ON THE MOON
+
+    block append nav
+        
+block append content 
+   section.jeu.container-fluid
+    .row
+      article.col-lg-6
+        .consigne
+          .gameRules
+            .piece
+            .rules
+              p
+                | Ramassez les pi&egrave;ces.
+                br
+                |  Vous devez eviter les plan&egrave;tes pour survivre
+              h6(style='color:red') ATTENTION A LA GRAVITE
+          .touche
+            h5 Touche de direction
+          .gameAnimation
+            .competences
+              h4 L&apos;EVOLUTION D&apos;UN DEV FULL STACK JS
+              .etagere
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+                div
+              .evolution
+                #moonWalk
+                  img#walk(src='images/moonW.png' alt='moonwalk')
+                #hideShow
+                  #evo1(style='background-image: url(images/evo1.png);')
+                  #evo2(style='background-image: url(images/evo2.png);')
+                  #evo3(style='background-image: url(images/evo3.png);')
+                  #evo4(style='background-image: url(images/evo4.png);')
+                  #evo5(style='background-image: url(images/evo5.png);')
+      article.col-lg-6
+        .gamePart
+          .lifeBar
+            .lifePiece
+              h3#add 0
+            .life
+              h3 Charlie&apos;s Life
+              .progress
+                .progress-bar(role='progressbar' style='width: 100%' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100')
+          #game.game
+            #start.start
+              .bague
+                #btn.btn
+                  | PLAY
+            img#imgBack1(src='images/etoile.png' alt='etoile1' style='left: 0px;')
+            img#imgBack2(src='images/etoile2.png' alt='etoile2' style='left: 0px;')
+            img#imgBack3(src='images/etoile3.png' alt='etoile3' style='left: 0px;')
+            img#imgBack4(src='images/moon.png' alt='moon' style='left: 0px;')
+            #centrage(style='top:250px;left:100px;')
+              #masque
+                img#sprite(src='images/rocketSprite1.png')
+block append pied  
+  script(src='javascripts/script.js')

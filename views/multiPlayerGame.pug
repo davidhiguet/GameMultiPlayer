@@ -1,0 +1,40 @@
+extends layout.pug
+
+block append head
+  title= "serveur"
+  script(src="/socket.io/socket.io.js")
+  script(src="/javascripts/multiPlayerScript.js")
+
+block append content 
+    section#multiPlayerGame.containerfluid
+        .row
+            article.col-lg-12
+                #play
+                    #gamePart
+                        #game
+                            h3#timer TIMER
+                            article#circle
+                            .firstPlayer.first    
+                                .property
+                                    h4.name= user
+                                    h4.score score 
+                                    h4 POINTS
+                                .persoImg
+                                    img(src="/images/"+myAvatar+".png" alt="'"+myAvatar+"'")
+                            .secondPlayer.second
+                                .persoImg
+                                    img(src="/images/inconnue.png" alt="'"+myAvatar2+"'")
+                                .property
+                                    h4.name secondplayer
+                                    h4.score score 
+                                    h4 POINTS
+                            #rules
+                                h2#waitingMessage Patientez pour le second joueur
+                                h3#message
+                            .tableauScore
+                                h2 Meilleur score
+                                ul
+                                for val in party
+                                    li= val.name +": "+ val.score+" points"
+                    #score
+    script(src="/javascripts/circleTurned.js")

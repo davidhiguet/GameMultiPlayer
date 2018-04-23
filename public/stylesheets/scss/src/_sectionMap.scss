@@ -1,0 +1,26 @@
+.map{
+    margin-top: 246px;
+    @include shadow2;
+    article:first-of-type{
+    overflow: hidden;
+    border:5px solid $colorOne;
+    color: $colorOne;
+    }
+    article:nth-child(2), article:nth-child(3){
+    height: 600px;
+    }
+    article:nth-child(3){
+    overflow: scroll;
+    }
+    article:nth-child(2){
+        text-align: center;
+		h5{
+        color: $colorOne;
+        margin-top:50px;
+        margin-bottom:50px;
+        }	
+        #map{
+             height: 100%;
+        }
+	}
+}    

@@ -1,0 +1,18 @@
+doctype html
+html(lang= 'fr')
+    head
+        block head
+            include head.pug
+    body
+    header.container-fluid
+        block header
+        nav#mainNav.navbar.navbar-expand-lg.bg-secondary.fixed-top.text-uppercase        
+            block nav
+            include menu.pug
+    
+    block content
+    
+    
+    footer.container-fluid
+        block pied
+            include scriptfooter.pug

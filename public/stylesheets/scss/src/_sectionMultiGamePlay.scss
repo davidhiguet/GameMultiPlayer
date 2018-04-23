@@ -1,0 +1,208 @@
+// section multi player game page
+#multiPlayerGame{
+width: 100vw;
+height: 100vh;
+@include shadow4;
+background-color: black;
+position: absolute;
+z-index: 100;
+    #play{
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: black;
+    overflow: hidden;
+    z-index: 9900;
+    margin: 0 auto;
+    text-align: center;
+        #gamePart{
+        position: absolute;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        display: Block;
+        background-color: black;
+        overflow: hidden;
+        z-index: 9999;
+        margin: 0 auto;
+        text-align: center;    
+            #game{
+            position: absolute;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 200px;
+            width: 100vw;
+            height: 100vh;
+                #timer{
+                    display: none;
+                    color: white;
+                    font-size: 40px;
+                    z-index: 100;
+                    margin: 0 auto;
+                    position: relative;
+                    top: -115px;
+                }
+                #circle{
+                margin-top: 250px;
+                border: 5px solid black;
+                background-color: rgb(123, 173, 202);
+                width: 500px;
+                height: 500px;
+                border-radius: 50%;
+                position: relative;
+                -animation: spin1 2.5s infinite linear;
+                -moz-animation: spin1 2.5s infinite linear;
+                animation: spin1 2.5s infinite linear;
+                margin: 0 auto;
+                text-align: center;
+                @include shadow2; 
+                }
+            }
+            .firstPlayer{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100px;
+            background-color: rgb(123, 173, 202);
+            @include shadow2;
+            display: flex;
+                .property{
+                text-align: center;
+                margin: 0 auto;
+                position: absolute;
+                left: 0;
+                width: 150px;
+                    h4{
+                    text-align: center;
+                    margin: 0 auto;
+                    }
+                    h4:first-of-type{
+                    max-width: 154px;
+                    color: yellow;
+                    }
+                    h4:nth-child(2){
+                    font-size: 25px;
+                    }
+                }
+                .persoImg{
+                width: 100px;
+                height: 100px;
+                overflow: hidden;
+                right: 0;
+                position: absolute;
+                    img{
+                    background-color: yellow;
+                    height: 100%;width: 100%;
+                    }
+                }
+            }
+            .secondPlayer{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100px;
+            background-color: rgb(123, 173, 202);
+            @include shadow2;  
+            display: flex;
+                .property{
+                text-align: center;
+                margin: 0 auto;
+                position: absolute;
+                right: 0;
+                width: 150px;
+                    h4{
+                    text-align: center;
+                    margin: 0 auto;
+                    }
+                    h4:first-of-type{
+                    max-width: 154px;
+                    color: red
+                    }
+                    h4:nth-child(2){
+                    font-size: 25px;
+                    }
+                }
+                .persoImg{
+                width: 100px;
+                overflow: hidden;
+                    img{
+                    background-color: red;
+                    height: 100%;
+                    width: 100%;
+                    left: 0;
+                    }
+                }
+            }
+            #rules
+                h2{
+                    color: white;
+                    padding-top: 200px;
+                }
+                h3{
+                    color: white;
+                }
+            .tableauScore{
+            position: absolute;
+            left: 0px;
+            top: 350px;
+            height: 400px;
+                h2{
+                color: rgb(123, 173, 202);
+                }
+                li{
+                color: white;
+                }
+            }
+        }
+    }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+div {
+animation: fadeIn 1s;
+}
+#circle{
+    display: none;
+}
+.bigCircle{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    z-index: 10000000;
+    position: absolute;
+}
+.yellow{
+    background-color: yellow;
+}
+.red{
+    background-color: red;
+}
+
+@-webkit-keyframes spin1 {
+    0% { -webkit-transform: rotate(0deg);}
+    100% { -webkit-transform: rotate(360deg);}
+}
+    @-moz-keyframes spin1 {
+    0% { -moz-transform: rotate(0deg);}
+    100% { -moz-transform: rotate(360deg);}
+}
+    @keyframes spin1 {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+} 
+#red{
+    background-position: center, center;
+    background-size: contain;
+    z-index: 9999;
+}
+
+#yellow{
+    background-position: center, center;
+    background-size: contain;
+    z-index: 9999;
+}

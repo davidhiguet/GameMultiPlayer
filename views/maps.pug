@@ -1,0 +1,55 @@
+extends layout.pug
+
+block append head
+  title= "serveur"
+
+block append header 
+    h1 GOOGLE MAPS API
+    h2 NODE.JS / MongoDB
+
+    block append nav
+        
+block append content 
+    section.map.container
+        div.row
+            article.col-lg-12
+                p
+                | - Récupérer les informations issues d&apos;une base de donn&eacute;es
+                br
+                | - faire un listing des endroits o&ugrave; se trouvent les v&eacute;libs    
+                br
+                | - Mettre en place l&apos;API Google Maps et retranscrire les donn&eacute;es de géolocalisation issues de la base en Marqueur sur la carte
+            article.col-lg-6
+                h5 Velibs sur GOOGLE MAPS
+                
+                #map
+                script.
+                    var map;
+                    var coords = !{JSON.stringify(data)}
+
+                    function initMap() {
+
+                        map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: 48.8566, lng: 2.3522},
+                        zoom: 15
+                        });
+                        coords.forEach( function(coord) {
+                        var latLng = new google.maps.LatLng(coord.latitude, coord.longitude);
+                        var size = new google.maps.Size(32, 32);
+                        var marker = new google.maps.Marker({
+                            position: latLng,
+                            map: map,
+                            icon: { url: '/images/favicon.ico', scaledSize: size}
+                        });
+                        });
+                    }
+                script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHbYXRoa6fSubN0lddJBg5wZxJC0qGC-4&callback=initMap", async='', defer='')
+            article.col-lg-6
+                h3 Géolocalisation des VELIBS
+                ul
+                for val in data
+                    li= val.name 
+    block append pied  
+
+
+    
