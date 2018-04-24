@@ -16,17 +16,7 @@ var app = express();
 
 const pug = require('pug');
 app.set('view engine', 'pug');
-/*
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017';
-const dbName = 'velo';
 
-app.use(function (req, res, next) {
-    res.io = io;
-    next();
-});
-*/
-//o = require('./sock');
 app.use(session({
     secret: 'secretsecretIhavegotasecret',
     saveUninitialized: false,
