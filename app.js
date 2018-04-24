@@ -61,6 +61,12 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
+var app = express();
+process.on('SIGINT', function () {
+    db.close(function () {
+        process.exit(0);
+    });
+});
 app.io = require('./socketServer');
 
 module.exports = app;
