@@ -99,6 +99,7 @@ var stagingPoint = {
   register: function (data) {
     console.log('fin')
     if(save){
+      save = false;
       var party = new Party({
         name: data.name,
         score: data.score,
@@ -107,7 +108,6 @@ var stagingPoint = {
           console.log(err);
         } else {
           console.log('save best player');
-          save = false;
           
         }
       });
