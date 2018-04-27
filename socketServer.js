@@ -98,8 +98,7 @@ var stagingPoint = {
   },
   register: function (data) {
     console.log('fin')
-    if(save){
-      save = false;
+    if(save === true){
       var party = new Party({
         name: data.name,
         score: data.score,
@@ -108,6 +107,7 @@ var stagingPoint = {
           console.log(err);
         } else {
           console.log('save best player');
+          save = false;
           
         }
       });
@@ -133,7 +133,10 @@ var stagingPoint = {
    
   }
 }
-var connection = function (socket) {
+
+
+io.on('connection', function (socket) {
+  console.log('connectionio')
 
   socket.on('multiPlayerGame', function (data) {
 
@@ -178,10 +181,4 @@ var connection = function (socket) {
       stagingPoint.deleteSocket(socket.id);
     });
   });
-};
-
-io.on('connection', function (socket) {
-  console.log('connectionio')
-  connection(socket);
 });
-module.exports = io;
