@@ -98,18 +98,20 @@ var stagingPoint = {
   },
   register: function (data) {
     console.log('fin')
-    var party = new Party({
-      name: data.name,
-      score: data.score,
-    }).save(function (err, party) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('save best player');
-        //delete partyStarted[data.room];
-        
-      }
-    });
+    if(save === true){
+      var party = new Party({
+        name: data.name,
+        score: data.score,
+      }).save(function (err, party) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('save best player');
+          save = false;
+          
+        }
+      });
+    }
   },
 
   clearRoom: function (room) {
@@ -172,7 +174,7 @@ var connection = function (socket) {
     });
     socket.on('socketEND', function () {
       global.players.splice(global.players.indexOf(socket.name), 1);
-
+      save = true;
       stagingPoint.deleteSocket(socket.id);
     });
   });
