@@ -98,7 +98,7 @@ var stagingPoint = {
   },
   register: function (data) {
     console.log('fin')
-    if(save === true){
+    if(save){
       var party = new Party({
         name: data.name,
         score: data.score,
