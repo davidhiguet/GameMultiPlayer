@@ -15,7 +15,7 @@ window.onload = function () {
     //var event;
 
     /***************************Show the property of the other player in my view****************************/
-    var playerDispatch = function () {
+    var playerDispatchProperty = function () {
 
         $('.' + GAME.players[FIRST].id + ' .property .name').text(GAME.players[FIRST].name);
         $('.' + GAME.players[FIRST].id + ' .property .score').text(GAME.players[FIRST].score);
@@ -107,44 +107,44 @@ window.onload = function () {
             }, 5000);
         }
     }
-    
+    /***************************creations of avatars following the mouse pointer****************************/
     var creationPersonnage = {
-        insertDiv : function (id, color, back) {
+        insertMouseAvatar : function (id, color, back) {
             var x = 0;y = 0;
-            var div = window.document.createElement('div');
-            div.id = id;
-            div.style.left = (x - (size / 2)) + 'px';
-            div.style.top = (y + (size / 2)) + 'px';
-            div.style.border = 10 +'px solid '+ color;
-            div.style.borderRadius = 50+'%';
-            div.style.zIndex = 1000000;
-            div.style.width = size + 'px';
-            div.style.height = size + 'px';
-            div.style.position = 'absolute';
-            div.style.backgroundImage = 'url("/images/'+back+'.png")';
-            div.style.backgroundSize = 'cover';
-            window.document.body.appendChild(div);
+            var mouseAvatar = window.document.createElement('div');
+            mouseAvatar.id = id;
+            mouseAvatar.style.left = (x - (size / 2)) + 'px';
+            mouseAvatar.style.top = (y + (size / 2)) + 'px';
+            mouseAvatar.style.border = 10 +'px solid '+ color;
+            mouseAvatar.style.borderRadius = 50+'%';
+            mouseAvatar.style.zIndex = 1000000;
+            mouseAvatar.style.width = size + 'px';
+            mouseAvatar.style.height = size + 'px';
+            mouseAvatar.style.position = 'absolute';
+            mouseAvatar.style.backgroundImage = 'url("/images/'+back+'.png")';
+            mouseAvatar.style.backgroundSize = 'cover';
+            window.document.body.appendChild(mouseAvatar);
         },
-        updateDivPosition : function (event, id) {
+        updateAvatarPosition : function (event, id) {
             
-            var div = window.document.getElementById(id);
-            if (div) {
-                var newLeft = (event.x - 10);
-                var newTop = (event.y + 10);
-                if (newLeft < 0) {
-                    newLeft = 0;
+            var mouseAvatar = window.document.getElementById(id);
+            if (mouseAvatar) {
+                var newLeftCoord = (event.x - 10);
+                var newTopCoord = (event.y + 10);
+                if (newLeftCoord < 0) {
+                    newLeftCoord = 0;
                 }
-                if (newTop < 0) {
-                    newTop = 0;
+                if (newTopCoord < 0) {
+                    newTopCoord = 0;
                 }
-                if ((newLeft + (size)) > document.documentElement.clientWidth) {
-                    newLeft = document.documentElement.clientWidth - (size);
+                if ((newLeftCoord + (size)) > document.documentElement.clientWidth) {
+                    newLeftCoord = document.documentElement.clientWidth - (size);
                 }
-                if ((newTop + (size)) > document.documentElement.clientHeight) {
-                    newTop = document.documentElement.clientHeight - (size);
+                if ((newTopCoord + (size)) > document.documentElement.clientHeight) {
+                    newTopCoord = document.documentElement.clientHeight - (size);
                 }
-                div.style.top = newTop + 'px';
-                div.style.left = newLeft + 'px';
+                mouseAvatar.style.top = newTopCoord + 'px';
+                mouseAvatar.style.left = newLeftCoord + 'px';
             }
         }
     };
@@ -166,9 +166,7 @@ window.onload = function () {
         })
         $('.red').on('click', function () {
 
-            $(".red").css('box-shadow', '0', '5px', '42px', 'rgba(0, 0, 0, 0.5)');
             GAME.players[FIRST].score = GAME.players[FIRST].score - 1;
-            playerDispatch()
             var evolutionScore = {
                 idPlayer: GAME.players[FIRST].id,
                 scorePlayer: GAME.players[FIRST].score,
@@ -208,14 +206,14 @@ window.onload = function () {
             phase.one();
             console.log('first' + avatarChoosen)
                 /*my perso on the mouse*/
-                creationPersonnage.insertDiv(FIRST, color.first, avatarChoosen);
+                creationPersonnage.insertMouseAvatar(FIRST, color.first, avatarChoosen);
                 
                 window.document.addEventListener('mousemove', function (event) {
                     var event = {
                         x: event.clientX,
                         y: event.clientY,
                     }
-                    creationPersonnage.updateDivPosition(event, FIRST);
+                    creationPersonnage.updateAvatarPosition(event, FIRST);
                     /*send my position to the other player*/
                     socket.emit('myPlayer', event)
                 });
@@ -236,8 +234,8 @@ window.onload = function () {
                 }
             }
             /*creation secondplayer div character*/
-            creationPersonnage.insertDiv(SECOND, color.second, GAME.players[SECOND].avatar );
-            playerDispatch();
+            creationPersonnage.insertMouseAvatar(SECOND, color.second, GAME.players[SECOND].avatar );
+            playerDispatchProperty();
             phase.two();
 
         });
@@ -246,7 +244,7 @@ window.onload = function () {
             /*receive the position from the other player*/
             var coords = events;
             console.log('events'+events)
-            creationPersonnage.updateDivPosition(coords, SECOND);
+            creationPersonnage.updateAvatarPosition(coords, SECOND);
         });
 
         /***************************Party started****************************/
