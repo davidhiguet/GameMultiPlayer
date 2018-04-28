@@ -12,6 +12,7 @@ window.onload = function () {
         second: 'red'
     }
     var size = 100;
+    //var event;
 
     /***************************Show the property of the other player in my view****************************/
     var playerDispatch = function () {
@@ -75,7 +76,7 @@ window.onload = function () {
         timer: function () {/*TIMER 15 SECONDE PAR PARTY*/
             document.getElementById('timer').style.display = 'block';
 
-            var timer = 30;
+            var timer = 20;
             var functionInterval1 = setInterval(interVal1, 1000);
 
             function interVal1() {
@@ -176,37 +177,6 @@ window.onload = function () {
         })
     }
 
-    var touchPlay = function () {
-            var perso1 = document.getElementById(FIRST);
-            perso1X = window.getComputedStyle(perso1, null).getPropertyValue("left");
-            perso1Y = window.getComputedStyle(perso1, null).getPropertyValue("top"); 
-            perso1X = parseFloat(perso1X);
-            perso1Y = parseFloat(perso1Y);
-            console.log('^perso1X '+ perso1X)
-            perso1Width = parseFloat(perso1.style.width);
-            perso1Height = parseFloat(perso1.style.height);
-
-            var perso2 = document.getElementById(SECOND);
-            perso2X = window.getComputedStyle(perso2, null).getPropertyValue("left");
-            perso2Y = window.getComputedStyle(perso2, null).getPropertyValue("top");
-            perso2X = parseFloat(perso2X);
-            perso2Y = parseFloat(perso2Y);
-            perso2Width = parseFloat(perso2.style.width);
-            console.log('^persoX ' + perso2Width)
-            perso2Height = parseFloat(perso2.style.height);
-
-            if (perso1X < perso2X + perso2Width && perso1X + perso1Width > perso2X && perso1Y < perso2Y + perso2Height && perso1Height + perso1Y > perso2Y) {
-
-                document.getElementById(FIRST).style.left = perso1X - 300 +'px';
-                document.getElementById(SECOND).style.left = perso2X + 300 + 'px';
-                console.log('collision')
-                console.log(document.getElementById(FIRST).style.left)
-
-            }        
-    }
-
-
-
     var socket = io.connect();
     /***************************Start****************************/
 
@@ -225,7 +195,7 @@ window.onload = function () {
         socket.emit('multiPlayerGame', description);
 
 
-        socket.on('multiPlayerGame', function (data) {
+        socket.on('multiPlayerGame1', function (data) {
             //console.log(data)
             FIRST = data;
             var giveClass = document.getElementsByClassName('first');
@@ -283,7 +253,7 @@ window.onload = function () {
         socket.on('letSGo', function (data, events) {
             
             clickPlay();
-            touchPlay();
+            
             var startTimer = setTimeout(function () {
                 phase.timer();
             }, 3100);
@@ -332,3 +302,5 @@ window.onload = function () {
     };
 connection();
 };
+
+
