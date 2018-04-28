@@ -8,7 +8,7 @@ var partyStarted = {};
 var clients = {};
 var winner = {};
 var save = true;
-var events
+var events;
 
 
 var newParty = (function () {
@@ -80,28 +80,31 @@ var stagingPoint = {
 
     if (score.scorePlayer === score.scorePlayer2) {
       winner.egal = score.scorePlayer2;
-
+      console.log('egalité')
       io.to(room).emit('result', winner);
     }
 
     if (score.scorePlayer < score.scorePlayer2) {
       winner.name = score.namePlayer2;
       winner.score = score.scorePlayer2;
-
+      console.log('inf')
       io.to(room).emit('result', winner);
     }
 
     if (score.scorePlayer > score.scorePlayer2) {
       winner.name = score.idPlayer;
       winner.score = score.scorePlayer;
-
+      console.log('sup')
       io.to(room).emit('result', winner);
     }
   },
   register: function (data) {
     console.log('fin')
-    if(save === true){
-      save = false;
+    
+    if(save){
+
+      save= false;
+      console.log('save1 ' + save)
       var party = new Party({
         name: data.name,
         score: data.score,
@@ -112,6 +115,10 @@ var stagingPoint = {
           console.log('save best player');
         }
       });
+
+    } else {
+      save = true;
+      console.log('save2 '+save)
     }
   },
 
@@ -142,7 +149,7 @@ io.on('connection', function (socket) {
     var room;
     var index;
 
-    socket.emit('multiPlayerGame', socket.id);
+    socket.emit('multiPlayerGame1', socket.id);
     socket.name = data.user;
     socket.avatar = data.avatar;
     clients[socket.id] = socket;
@@ -179,10 +186,10 @@ io.on('connection', function (socket) {
     });
     socket.on('socketEND', function () {
       global.players.splice(global.players.indexOf(socket.name), 1);
-      save = true;
       stagingPoint.deleteSocket(socket.id);
     });
   });
 });
+
 
 module.exports = io;
