@@ -8,6 +8,8 @@ var partyStarted = {};
 var clients = {};
 var winner = {};
 var save = true;
+var events
+
 
 var newParty = (function () {
   var PartyStart = function (id) {
@@ -60,7 +62,7 @@ var stagingPoint = {
     partyStarted[room].addPlayer(socket);
     if (partyStarted[room].number === 2) {
       io.to(room).emit('roomFull',partyStarted[room]);
-      //console.log('roomFull');
+      console.log(events);
       that.play(socket, room);
       
     }
@@ -99,6 +101,7 @@ var stagingPoint = {
   register: function (data) {
     console.log('fin')
     if(save === true){
+      save = false;
       var party = new Party({
         name: data.name,
         score: data.score,
@@ -107,8 +110,6 @@ var stagingPoint = {
           console.log(err);
         } else {
           console.log('save best player');
-          save = false;
-          
         }
       });
     }
@@ -129,8 +130,6 @@ var stagingPoint = {
   deleteSocket: function (socket) {
     delete clients[socket];
     console.log('remove');
-    
-   
   }
 }
 
@@ -152,7 +151,13 @@ io.on('connection', function (socket) {
 
 
     socket.on('score', function (data) {
-      io.to(room).emit('evolutionScore', data);
+      io.to(room).emit('evolutionScore', data, events);
+    });
+    socket.on('myPlayer', function (data) {
+      //my perso on the other player screen
+      events = data;
+      console.log(events)
+      socket.broadcast.to(room).emit('playerMove', events);
     });
 
     socket.on('scoreFinal', function (data) {
@@ -161,10 +166,7 @@ io.on('connection', function (socket) {
 
     socket.on('finish', function (data) {
       //console.log('room'room)
-
         stagingPoint.register(data)
-
-      
     });
 
     socket.on('disconnect', function () {
@@ -182,3 +184,5 @@ io.on('connection', function (socket) {
     });
   });
 });
+
+module.exports = io;
