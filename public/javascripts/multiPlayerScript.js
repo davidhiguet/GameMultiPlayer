@@ -290,7 +290,7 @@ window.onload = function () {
             }
         });
 
-        socket.on('deconnection', function (game) {
+        socket.on('deconnection', function (socketId) {
 
             document.getElementById('rules').style.display = "block";
             document.getElementById('circle').style.display = "none";
