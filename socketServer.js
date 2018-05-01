@@ -17,7 +17,7 @@ var newParty = (function () {
     this.players = {};
     this.number = 0;
   };
-  PartyStart.prototype.addPlayer = function (socket) {
+  PartyStart.prototype.playerAdd = function (socket) {
     this.players[socket.id] = {
       id: socket.id,
       name: socket.name,
@@ -26,7 +26,7 @@ var newParty = (function () {
     };
     this.number += 1;
   };
-  PartyStart.prototype.removePlayer = function (id) {
+  PartyStart.prototype.playerRemove = function (id) {
     delete this.players[id];
     this.number -= 1;
   };
@@ -37,7 +37,7 @@ var newParty = (function () {
 
 var stagingPoint = {
 
-  uniqueId: function () {
+  IdGenerator: function () {
     const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
     return randomLetter + Date.now();
   },
@@ -45,7 +45,7 @@ var stagingPoint = {
 
   createRoom: function () {
     //console.log('roomCreate');
-    var room = this.uniqueId();
+    var room = this.IdGenerator();
     availableRooms.push(room);
     partyStarted[room] = newParty(room);
     return room;
@@ -59,7 +59,7 @@ var stagingPoint = {
     }
     socket.join(room);
     socket.emit('joinRoom', room);
-    partyStarted[room].addPlayer(socket);
+    partyStarted[room].playerAdd(socket);
     if (partyStarted[room].number === 2) {
       io.to(room).emit('roomFull',partyStarted[room]);
       console.log(events);
@@ -92,9 +92,9 @@ var stagingPoint = {
     }
 
     if (score.scorePlayer > score.scorePlayer2) {
-      winner.name = score.idPlayer;
+      winner.id = score.idPlayer;
       winner.score = score.scorePlayer;
-      console.log('sup')
+      
       io.to(room).emit('result', winner);
     }
   },
@@ -122,7 +122,7 @@ var stagingPoint = {
     }
   },
 
-  clearRoom: function (room) {
+  roomClear: function (room) {
   
     if (partyStarted[room].number === 0) {
       var indexOfRoom = availableRooms.indexOf(room);
@@ -134,7 +134,7 @@ var stagingPoint = {
     }
   },
   
-  deleteSocket: function (socket) {
+  socketDelete: function (socket) {
     delete clients[socket];
     console.log('remove');
   }
@@ -179,14 +179,14 @@ io.on('connection', function (socket) {
     socket.on('disconnect', function () {
       global.players.splice(index, 1);
       
-     partyStarted[room].removePlayer(socket.id);
-      stagingPoint.clearRoom(room);
+     partyStarted[room].playerRemove(socket.id);
+      stagingPoint.roomClear(room);
       socket.to(room).emit('deconnection', socket.id);
-      stagingPoint.deleteSocket(socket.id);
+      stagingPoint.socketDelete(socket.id);
     });
     socket.on('socketEND', function () {
       global.players.splice(global.players.indexOf(socket.name), 1);
-      stagingPoint.deleteSocket(socket.id);
+      stagingPoint.socketDelete(socket.id);
     });
   });
 });
