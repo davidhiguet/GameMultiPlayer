@@ -5,7 +5,7 @@ Multiplayer game project en JAVASCRIPT ( node / express - pug / webSocket - sock
 Dans public/javascripts, vous avez :
 - 'validationForm.js' ( pour laverification du formulaire ),
 - 'multiPlayerScript.js' ( socketio côté client ),
-- 'circleTurned.js.js' ( creation des cercles de couleur ).
+- 'circleTurned.js' ( creation des cercles de couleur ).
 
 socketServer.js est la partie socketio côté serveur;
 
